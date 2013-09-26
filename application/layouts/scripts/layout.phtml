@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1">
+<meta name="viewport" content="width=device-width" />
+
+<base href="<?php echo 'http'.($_SERVER['HTTPS']?'s':'').'://'.$_SERVER['HTTP_HOST'].$this->baseUrl(); ?>/" />
+<?php echo $this->headTitle('Crumblez')->setSeparator(' | '); ?>
+<link rel="shortcut icon" href="/images/icons/favicon.ico" />
+
+<script src="/js/jquery-2.0.0.min.js"></script>
+<script src="/js/init.js"></script>
+
+
+<?php echo $this->headMeta() ?>
+<?php echo $this->headScript() ?>
+
+</head>
+
+<body class="<?php echo $this->placeholder('bodyClass') ?>">
+
+<header>
+	<div class="container clearfix">
+		
+	</div><!-- end container -->
+</header>
+
+	 <?php echo $this->layout()->content ?>
+
+<footer>
+	<div class="container">
+		
+	</div><!-- container -->
+</footer>
+
+
+<?php 
+	if($_REQUEST['profiler']){
+		$helper = new DreamProfilerHelper();
+		echo $helper->echoTable();
+	}
+?>
+
+</body>
+</html>
