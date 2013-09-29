@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TODO: history for each player and each alliance.
+ * 
  * @author Alarich
  *        
  *        
@@ -12,9 +12,16 @@ class Crumblez_Model_Player extends Reusable_Model_Object_MyPresistable_Abstract
 	public $playerId;
 	public $name;
 	public $allianceId;
-	public $points;	
-	public $rank;	
 	public $towns;
+	public $time;//update time in UNIX
+	public $points;
+	public $pointsBattle;
+	public $pointsAttack;	
+	public $pointsDefense;
+	public $pointsRank;
+	public $pointsBattleRank;
+	public $pointsAttackRank;	
+	public $pointsDefenseRank;
 	
 	public static function get($conf)
 	{
@@ -55,6 +62,17 @@ class Crumblez_Model_Player extends Reusable_Model_Object_MyPresistable_Abstract
     	$select = $db->select()->from('player','id')->where('player_id = ?',$playerId);
     	$result = $db->fetchOne($select);
     	if($result)return $result;
+    	else return false;
+    }
+    
+    
+    public static function getLatestPlayerData($playerId){
+    	$db = Reusable_Db_Registry::getDb();
+    	$select = $db->select()->from('player','*')->where('player_id = ?',$playerId);
+    	$select->order('time DESC');
+    	$select->limit(1);
+    	$result = $db->fetchOne($select);
+    	if($result)return new self($result);
     	else return false;
     }
 }
