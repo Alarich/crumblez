@@ -134,6 +134,10 @@ class ImportController extends Zend_Controller_Action
     	file_put_contents($filenameD,file_get_contents($bpDLink));
     	$filename = $config->serverdata->path."EN56/alliances.txt.".time().".gz";
     	file_put_contents($filename,file_get_contents($link));
+    	if(!file_exists($filenameT) || !file_exists($filenameA) || !file_exists($filenameD) || !file_exists($filename)){// some or all import failed
+    		Crumblez_Model_Cronjob::saveCron('alliance_update_failure'); 
+    		die('update failure');
+    	}
     	$linesT = gzfile($filenameT);
     	$linesA = gzfile($filenameA);
     	$linesD = gzfile($filenameD);
@@ -231,6 +235,11 @@ class ImportController extends Zend_Controller_Action
     	file_put_contents($filenameD,file_get_contents($bpDLink));
     	$filename = $config->serverdata->path."EN56/players.txt.".time().".gz";
     	file_put_contents($filename,file_get_contents($link));
+    	if(!file_exists($filenameT) || !file_exists($filenameA) || !file_exists($filenameD) || !file_exists($filename)){// some or all import failed
+    		Crumblez_Model_Cronjob::saveCron('player_update_failure'); 
+    		die('update failure');
+    	}
+    	
     	$linesT = gzfile($filenameT);
     	$linesA = gzfile($filenameA);
     	$linesD = gzfile($filenameD);
@@ -302,6 +311,11 @@ class ImportController extends Zend_Controller_Action
     	}
     
     	die("Updated ".$n." Player listings. It took ".(microtime(true)-$mtime)." seconds");
+    }
+    
+    public function importPlayerTestAction()
+    {
+    	die(var_dump($this->_getAllParams()));
     }
     
 }

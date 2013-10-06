@@ -1,0 +1,65 @@
+
+
+<?php foreach($this->realAllianceBPNumbers as $alliance=>$data):?>
+
+<p><?php echo $alliance;?></p>
+<table>
+	<tr>
+		<th>Rank</th>
+		<th>BP</th>
+		<th>ABP</th>
+		<th>DBP</th>
+		<th>Real BP</th>
+		<th>Real ABP</th>
+		<th>Real DBP</th>
+	</tr>
+	<tr>
+		<td><?php echo $data['rank'];?></td>
+		<td><?php echo $data['BP'];?></td>
+		<td><?php echo $data['ABP'];?></td>
+		<td><?php echo $data['DBP'];?></td>
+		<td><?php echo $data['BP_real'];?></td>
+		<td><?php echo $data['ABP_real'];?></td>
+		<td><?php echo $data['DBP_real'];?></td>
+	</tr>	
+</table>
+<?php endforeach;?>
+
+
+<h3>Ingame tags</h3>
+
+<textarea id="gameText" style="width:100%;height:200px;">
+
+	[table]
+		[**]
+			Rank[||]
+			Alliance[||]
+			BP[||]
+			ABP[||]
+			DBP[||]
+			Real BP[||]
+			Real ABP[||]
+			Real DBP[||]
+			BP d
+		[/**]
+		<?php foreach($this->realAllianceBPNumbers as $alliance=>$data):?>
+		[*]
+			<?php echo $data['rank']?>[|]
+			[ally]<?php echo $alliance;?>[/ally][|]
+			<?php echo $data['BP']?>[|]
+			<?php echo $data['ABP']?>[|]
+			<?php echo $data['DBP']?>[|]
+			<?php echo $data['BP_real']?>[|]
+			<?php echo $data['ABP_real']?>[|]
+			<?php echo $data['DBP_real']?>[|]
+			<?php echo ($data['BP_real']-$data['BP'])>0?'[color=#009900]'.($data['BP_real']-$data['BP']).'[/color]':'[color=#FF2D2D]'.($data['BP_real']-$data['BP']).'[/color]';?>
+		[/*]
+		<?php endforeach;?>
+	[/table]
+
+</textarea>
+
+
+<h3>Forum tags</h3>
+
+<textarea id="forumText" style="width:100%;height:200px;">[table][row][col]Rank[/col][col]Alliance[/col][col]BP[/col][col]ABP[/col][col]DBP[/col][col]Real BP[/col][col]Real ABP[/col][col]Real DBP[/col][col]BP d[/col][/row]<?php foreach($this->realAllianceBPNumbers as $alliance=>$data):?>[row][col]<?php echo $data['rank']?>[/col][col]<?php echo $alliance;?>[/col][col]<?php echo $data['BP']?>[/col][col]<?php echo $data['ABP']?>[/col][col]<?php echo $data['DBP']?>[/col][col]<?php echo $data['BP_real']?>[/col][col]<?php echo $data['ABP_real']?>[/col][col]<?php echo $data['DBP_real']?>[/col][col]<?php echo ($data['BP_real']-$data['BP'])>0?'[color=green]'.($data['BP_real']-$data['BP']).'[/color]':'[color=red]'.($data['BP_real']-$data['BP']).'[/color]';?>[/col][/row]<?php endforeach;?>[/table]</textarea>
